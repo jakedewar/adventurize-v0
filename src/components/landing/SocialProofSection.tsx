@@ -54,7 +54,7 @@ const Testimonial = ({
   );
 };
 
-interface PartnerLogoProps {
+interface IntegrationLogoProps {
   name: string;
   logoUrl: string;
 }
@@ -62,7 +62,7 @@ interface PartnerLogoProps {
 const PartnerLogo = ({
   name = "Partner Company",
   logoUrl = "https://api.dicebear.com/7.x/identicon/svg?seed=partner",
-}: PartnerLogoProps) => {
+}: IntegrationLogoProps) => {
   return (
     <div className="flex flex-col items-center group">
       <div className="h-20 w-40 bg-white/10 backdrop-blur-sm rounded-lg p-3 flex items-center justify-center border border-slate-200/10 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:border-blue-500/20 group-hover:bg-white/20 dark:group-hover:bg-slate-800/50">
@@ -75,7 +75,7 @@ const PartnerLogo = ({
 
 interface SocialProofSectionProps {
   testimonials?: TestimonialProps[];
-  partners?: PartnerLogoProps[];
+  integrations?: IntegrationLogoProps[];
 }
 
 const SocialProofSection = ({
@@ -105,26 +105,18 @@ const SocialProofSection = ({
       rating: 4,
     },
   ],
-  partners = [
+  integrations = [
     {
-      name: "TechCorp",
+      name: "Google Analytics",
       logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=techcorp",
     },
     {
-      name: "Innovate Inc",
+      name: "Shopify",
       logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=innovate",
     },
     {
-      name: "Future Brands",
+      name: "Klaviyo",
       logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=future",
-    },
-    {
-      name: "Global Media",
-      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=global",
-    },
-    {
-      name: "Next Level",
-      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=next",
     },
   ],
 }: SocialProofSectionProps) => {
@@ -195,11 +187,11 @@ const SocialProofSection = ({
         {/* Partner Logos */}
         <div>
           <h3 className="text-xl font-semibold mb-8 text-center">
-            Our Partners
+            Our Integrations
           </h3>
           <div className="flex flex-wrap justify-center gap-8">
-            {partners.map((partner, index) => (
-              <PartnerLogo key={index} {...partner} />
+            {integrations.map((integration, index) => (
+              <PartnerLogo key={index} {...integration} />
             ))}
           </div>
         </div>
