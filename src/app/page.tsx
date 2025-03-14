@@ -5,6 +5,7 @@ import SocialProofSection from "@/components/landing/SocialProofSection";
 import AnimatedBackground from "@/components/landing/AnimatedBackground";
 import EmailCollectionForm from "@/components/landing/EmailCollectionForm";
 import Navbar from "@/components/landing/Navbar";
+import ExtensionBanner from "@/components/landing/ExtensionBanner";
 
 export default function Home() {
   return (
@@ -14,6 +15,9 @@ export default function Home() {
 
       {/* Navigation */}
       <Navbar />
+      
+      {/* Extension Banner */}
+      <ExtensionBanner />
 
       {/* Hero section with email collection */}
       <HeroSection userContext="consumer" />

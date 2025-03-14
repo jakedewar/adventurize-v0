@@ -16,7 +16,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({
   headline = "Nobody likes an Ad. Everybody likes an Adventure.",
-  subheadline = "Transform your browsing experience with personalized micro-adventures that make the web fun again. Adventurize delivers quick, interactive stories tailored just for you.",
+  subheadline = "Transform your browsing experience with personalized micro-adventures that make the web fun again. Adventurize delivers quick, interactive adventures tailored just for you.",
   ctaText = "Join Waitlist",
   watchDemoText = "See an Adventure",
   userContext = 'consumer',
