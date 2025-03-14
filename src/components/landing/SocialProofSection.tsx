@@ -1,6 +1,7 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Star } from "lucide-react";
+import { Star, Chrome, Clock, Smile, MapPin, Utensils, Compass, ChevronRight, X, Maximize2, Minimize2, ArrowLeft } from "lucide-react";
 
 interface TestimonialProps {
   quote: string;
@@ -11,10 +12,10 @@ interface TestimonialProps {
 }
 
 const Testimonial = ({
-  quote = "Adventurize has completely transformed how we think about advertising. Our engagement rates have skyrocketed!",
-  author = "Jane Smith",
-  company = "Tech Innovators",
-  avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=jane",
+  quote = "I love how Adventurize turns my browsing breaks into mini-adventures that are actually fun!",
+  author = "Jake D.",
+  company = "Boston, MA",
+  avatarUrl = "https://api.dicebear.com/7.x/avataaars/svg?seed=jake",
   rating = 5,
 }: TestimonialProps) => {
   return (
@@ -54,72 +55,97 @@ const Testimonial = ({
   );
 };
 
-interface IntegrationLogoProps {
-  name: string;
-  logoUrl: string;
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
 }
 
-const PartnerLogo = ({
-  name = "Partner Company",
-  logoUrl = "https://api.dicebear.com/7.x/identicon/svg?seed=partner",
-}: IntegrationLogoProps) => {
+const FeatureCard = ({
+  icon,
+  title,
+  description,
+}: FeatureCardProps) => {
   return (
     <div className="flex flex-col items-center group">
-      <div className="h-20 w-40 bg-white/10 backdrop-blur-sm rounded-lg p-3 flex items-center justify-center border border-slate-200/10 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:border-blue-500/20 group-hover:bg-white/20 dark:group-hover:bg-slate-800/50">
-        <img src={logoUrl} alt={name} className="max-h-14 max-w-full" />
+      <div className="h-24 w-full bg-white/10 backdrop-blur-sm rounded-lg p-5 flex flex-col items-center justify-center border border-slate-200/10 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:border-blue-500/20 group-hover:bg-white/20 dark:group-hover:bg-slate-800/50">
+        <div className="mb-2">{icon}</div>
+        <h3 className="text-lg font-semibold text-slate-800 dark:text-white">{title}</h3>
       </div>
-      <p className="mt-2 text-xs text-center text-muted-foreground">{name}</p>
+      <p className="mt-3 text-sm text-center text-slate-600 dark:text-slate-300">{description}</p>
     </div>
   );
 };
 
 interface SocialProofSectionProps {
   testimonials?: TestimonialProps[];
-  integrations?: IntegrationLogoProps[];
+  features?: FeatureCardProps[];
 }
 
 const SocialProofSection = ({
   testimonials = [
     {
       quote:
-        "Adventurize has completely transformed how we think about advertising. Our engagement rates have skyrocketed!",
-      author: "Jane Smith",
-      company: "Tech Innovators",
-      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=jane",
+        "I love how Adventurize turns my browsing breaks into mini-adventures that are actually fun!",
+      author: "Jake D.",
+      company: "Boston, MA",
+      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=jake",
       rating: 5,
     },
     {
       quote:
-        "We've seen a 300% increase in customer engagement since implementing Adventurize's approach to advertising.",
-      author: "Michael Johnson",
-      company: "Global Retail",
-      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=michael",
+        "The personalized taco quest adventure was hilarious and actually led me to discover a new restaurant I love!",
+      author: "Maria S.",
+      company: "Food Enthusiast",
+      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=maria",
       rating: 5,
     },
     {
       quote:
-        "Our customers actually look forward to our ads now. That's something I never thought I'd say!",
-      author: "Sarah Williams",
-      company: "Consumer Brands",
-      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
+        "These micro-adventures are the perfect little break during my workday. Quick, fun, and surprisingly engaging!",
+      author: "Alex W.",
+      company: "Tech Professional",
+      avatarUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
       rating: 4,
     },
   ],
-  integrations = [
+  features = [
     {
-      name: "Google Analytics",
-      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=techcorp",
+      icon: <Chrome className="h-8 w-8 text-blue-500" />,
+      title: "Chrome Extension",
+      description: "Simple installation with a clean, minimal interface that doesn't disrupt your browsing.",
     },
     {
-      name: "Shopify",
-      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=innovate",
+      icon: <Clock className="h-8 w-8 text-emerald-500" />,
+      title: "60-Second Adventures",
+      description: "Short interactive narratives designed to be completed in about a minute.",
     },
     {
-      name: "Klaviyo",
-      logoUrl: "https://api.dicebear.com/7.x/identicon/svg?seed=future",
+      icon: <Smile className="h-8 w-8 text-amber-500" />,
+      title: "Personalized Content",
+      description: "Adventures tailored to your interests, location, and preferences.",
     },
   ],
 }: SocialProofSectionProps) => {
+  // State to track the current step of the adventure
+  const [adventureStep, setAdventureStep] = useState(1);
+  // State to track which route was chosen (1 = Adventurous, 2 = Classic)
+  const [chosenRoute, setChosenRoute] = useState(0);
+
+  // Function to handle adventure progression
+  const handleAdventureProgress = (step: number, route?: number) => {
+    setAdventureStep(step);
+    if (route) {
+      setChosenRoute(route);
+    }
+  };
+
+  // Function to reset the adventure
+  const resetAdventure = () => {
+    setAdventureStep(1);
+    setChosenRoute(0);
+  };
+
   return (
     <section className="w-full py-24 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-black relative overflow-hidden">
       {/* Background decorative elements */}
@@ -131,67 +157,24 @@ const SocialProofSection = ({
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-sm font-medium">
-            Success Stories
+            MVP Features
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-            Trusted by Innovators
+            Adventure in Your Browser
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Join the companies that are already transforming their advertising
-            approach with Adventurize.
+            Our Chrome Extension MVP delivers personalized micro-adventures through a simple, engaging popup UI.
           </p>
         </div>
 
         {/* Testimonials */}
-        <div className="mb-20">
-          <h3 className="text-xl font-semibold mb-8 text-center">
-            What Our Partners Say
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Testimonial key={index} {...testimonial} />
-            ))}
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="mb-20 py-12 px-6 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl backdrop-blur-sm">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                300%
-              </div>
-              <p className="text-slate-700 dark:text-slate-300">
-                Average Engagement Increase
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                50+
-              </div>
-              <p className="text-slate-700 dark:text-slate-300">
-                Enterprise Clients
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-amber-600 dark:text-amber-400 mb-2">
-                10M+
-              </div>
-              <p className="text-slate-700 dark:text-slate-300">
-                Monthly Active Users
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Partner Logos */}
         <div>
           <h3 className="text-xl font-semibold mb-8 text-center">
-            Our Integrations
+            What Early Users Say
           </h3>
-          <div className="flex flex-wrap justify-center gap-8">
-            {integrations.map((integration, index) => (
-              <PartnerLogo key={index} {...integration} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Testimonial key={index} {...testimonial} />
             ))}
           </div>
         </div>

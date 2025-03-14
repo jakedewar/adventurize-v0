@@ -11,10 +11,10 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({
-  headline = "Nobody likes an ad. Everyone likes an Adventure.",
-  subheadline = "Join the revolution in AdTech that transforms boring advertisements into exciting adventures that users actually want to engage with.",
-  ctaText = "Join the waitlist",
-  watchDemoText = "Watch how it works",
+  headline = "Nobody likes an Ad. Everyone likes an Adventure.",
+  subheadline = "Transform your browsing experience with personalized micro-adventures that make the web fun again. Adventurize delivers quick, interactive stories tailored just for you.",
+  ctaText = "Get the Extension",
+  watchDemoText = "See an Adventure",
 }: HeroSectionProps) => {
   return (
     <section className="relative w-full min-h-screen bg-gradient-to-b from-black via-slate-950 to-slate-950 text-white overflow-hidden pt-20">
@@ -42,7 +42,7 @@ const HeroSection = ({
         <div className="text-center max-w-4xl mx-auto">
           {/* Eyebrow text */}
           <div className="inline-block px-4 py-1 mb-6 rounded-full bg-blue-700/30 text-blue-300 text-sm font-medium animate-pulse">
-            Revolutionizing AdTech
+            Chrome Extension MVP
           </div>
 
           {/* Main headline */}
@@ -55,13 +55,17 @@ const HeroSection = ({
             {subheadline}
           </p>
 
-          {/* Email collection form */}
-          <div className="mb-10 w-full max-w-lg mx-auto">
-            <EmailCollectionForm
-              buttonText="Join Waitlist"
-              placeholderText="Enter your email address"
-              className="shadow-lg shadow-blue-900/20 bg-white/10 backdrop-blur-sm p-2 rounded-xl border border-white/20"
-            />
+          {/* Email collection form with gradient border */}
+          <div className="mb-10 w-full max-w-lg mx-auto flex justify-center">
+            <div className="gradient-border-container">
+              <div className="gradient-border-content">
+                <EmailCollectionForm
+                  buttonText="Join Waitlist"
+                  placeholderText="Enter your email address"
+                  className="bg-transparent shadow-none border-0"
+                />
+              </div>
+            </div>
           </div>
 
           {/* CTA buttons */}
@@ -104,7 +108,7 @@ const HeroSection = ({
             <div className="h-40 bg-blue-800/20 rounded-lg flex items-center justify-center">
               <div className="text-blue-300 text-center p-4">
                 <span className="block text-3xl mb-2">🚀</span>
-                <span>Exciting. Engaging. Memorable.</span>
+                <span>Personalized. Interactive. Engaging.</span>
               </div>
             </div>
           </div>

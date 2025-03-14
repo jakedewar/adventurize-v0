@@ -1,12 +1,13 @@
 import React from "react";
+import Navbar from "@/components/landing/Navbar";
+import AnimatedBackground from "@/components/landing/AnimatedBackground";
+import EmailCollectionForm from "@/components/landing/EmailCollectionForm";
 import HeroSection from "@/components/landing/HeroSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import SocialProofSection from "@/components/landing/SocialProofSection";
-import AnimatedBackground from "@/components/landing/AnimatedBackground";
-import EmailCollectionForm from "@/components/landing/EmailCollectionForm";
-import Navbar from "@/components/landing/Navbar";
+import { Target, BarChart3, Award } from "lucide-react";
 
-export default function Home() {
+export default function ForBrands() {
   return (
     <main className="relative min-h-screen bg-background">
       {/* Animated background that spans the entire page */}
@@ -16,11 +17,36 @@ export default function Home() {
       <Navbar />
 
       {/* Hero section with email collection */}
-      <HeroSection />
+      <HeroSection 
+        headline="Transform Ads into Adventures" 
+        subheadline="Engage your audience with interactive, gamified experiences that drive brand loyalty, increase conversions, and provide valuable consumer insights."
+        ctaText="Schedule a Demo"
+        watchDemoText="View Case Studies"
+      />
 
       {/* How it works section */}
       <section id="how-it-works">
-        <HowItWorksSection />
+        <HowItWorksSection 
+          title="How Adventurize Works for Brands"
+          description="Our platform enables brands to create engaging, interactive adventures that consumers actually enjoy experiencing."
+          steps={[
+            {
+              icon: <Target className="h-10 w-10 text-blue-500" />,
+              title: "Create Your Adventure",
+              description: "Design interactive brand experiences using our intuitive dashboard. Customize challenges, rewards, and branding elements."
+            },
+            {
+              icon: <BarChart3 className="h-10 w-10 text-emerald-500" />,
+              title: "Deploy & Distribute",
+              description: "Launch your adventure to consumers through our Chrome extension. Target specific demographics and browsing behaviors."
+            },
+            {
+              icon: <Award className="h-10 w-10 text-amber-500" />,
+              title: "Analyze & Optimize",
+              description: "Track performance metrics, gather consumer insights, and refine your adventures for maximum impact and ROI."
+            }
+          ]}
+        />
       </section>
 
       {/* Social proof section */}
@@ -32,16 +58,15 @@ export default function Home() {
       <section id="email-signup" className="py-20 bg-black text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready for Your Next Adventure?
+            Ready to Transform Your Brand Advertising?
           </h2>
           <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join our waitlist to be among the first to experience our Chrome Extension MVP. 
-            Nobody likes an Ad. Everyone likes an Adventure.
+            Join innovative brands already using Adventurize to create memorable, engaging experiences that consumers love.
           </p>
           <div className="max-w-lg mx-auto">
             <EmailCollectionForm
-              buttonText="Get Early Access"
-              placeholderText="Your email address"
+              buttonText="Request a Demo"
+              placeholderText="Your business email"
               className="mx-auto bg-white/5 backdrop-blur-sm p-2 rounded-xl border border-slate-800/30 shadow-lg"
             />
           </div>
@@ -82,4 +107,4 @@ export default function Home() {
       </footer>
     </main>
   );
-}
+} 

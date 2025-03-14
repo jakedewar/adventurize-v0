@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Zap, Target, BarChart } from "lucide-react";
+import { ArrowRight, Bell, Sparkles, MousePointer } from "lucide-react";
 
 interface HowItWorksSectionProps {
   title?: string;
@@ -14,25 +14,25 @@ interface HowItWorksSectionProps {
 
 const HowItWorksSection = ({
   title = "How Adventurize Works",
-  description = "Our revolutionary AdTech method transforms boring advertisements into engaging adventures that captivate your audience.",
+  description = "Our Chrome Extension MVP delivers quick, personalized micro-adventures through a simple popup UI that users voluntarily engage with.",
   steps = [
     {
-      icon: <Zap className="h-10 w-10 text-amber-500" />,
-      title: "Identify Boring Ad Spaces",
+      icon: <Bell className="h-10 w-10 text-amber-500" />,
+      title: "Subtle Badge Notification",
       description:
-        "We locate traditional ad placements that typically get ignored by users.",
+        "A discreet badge notification on the Chrome extension icon indicates when a new adventure is available for you.",
     },
     {
-      icon: <Target className="h-10 w-10 text-emerald-500" />,
-      title: "Transform into Adventures",
+      icon: <MousePointer className="h-10 w-10 text-emerald-500" />,
+      title: "Interactive Micro-Adventure",
       description:
-        "Our proprietary technology converts standard ads into interactive adventure experiences.",
+        "Click to open a visually appealing popup with a short, personalized interactive narrative that takes about 60 seconds to complete.",
     },
     {
-      icon: <BarChart className="h-10 w-10 text-blue-500" />,
-      title: "Measure Increased Engagement",
+      icon: <Sparkles className="h-10 w-10 text-blue-500" />,
+      title: "Personalized Experience",
       description:
-        "Watch as your audience actively engages with your brand through these adventure-based experiences.",
+        "Each adventure is tailored to your interests and location, ending with a subtle brand recommendation that feels natural and relevant.",
     },
   ],
 }: HowItWorksSectionProps) => {
@@ -47,7 +47,7 @@ const HowItWorksSection = ({
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-sm font-medium">
-            Our Process
+            Chrome Extension MVP
           </div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
             {title}
@@ -95,7 +95,7 @@ const HowItWorksSection = ({
               "transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
             )}
           >
-            Join the Revolution
+            Get the Extension
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
         </div>
