@@ -11,7 +11,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({
-  headline = "Nobody likes an ad. Everyone likes Adventure.",
+  headline = "Nobody likes an ad. Everyone likes an Adventure.",
   subheadline = "Join the revolution in AdTech that transforms boring advertisements into exciting adventures that users actually want to engage with.",
   ctaText = "Join the waitlist",
   watchDemoText = "Watch how it works",
