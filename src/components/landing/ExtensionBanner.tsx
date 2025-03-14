@@ -8,10 +8,11 @@ const ExtensionBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [isPulsing, setIsPulsing] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show banner after scrolling down 300px
+      // Show banner after scrolling down a bit
       setIsVisible(window.scrollY > 10);
     };
 
@@ -21,17 +22,18 @@ const ExtensionBanner = () => {
 
   // Start pulsing animation after banner is visible
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && !hasInteracted) {
       const timer = setTimeout(() => {
         setIsPulsing(true);
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [isVisible]);
+  }, [isVisible, hasInteracted]);
 
   const handleBannerClick = () => {
     setShowPopup(true);
     setIsPulsing(false);
+    setHasInteracted(true);
   };
 
   const handleClosePopup = () => {
@@ -40,6 +42,27 @@ const ExtensionBanner = () => {
 
   return (
     <>
+      {/* Add keyframes for the soft pulse animation */}
+      <style jsx global>{`
+        @keyframes softPulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+          50% {
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0);
+            background-color: rgba(255, 255, 255, 0.15);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+        }
+        .soft-pulse {
+          animation: softPulse 3s infinite;
+        }
+      `}</style>
+
       <div
         className={cn(
           "fixed top-16 md:top-20 left-0 right-0 z-40 transition-all duration-500 transform",
@@ -52,26 +75,29 @@ const ExtensionBanner = () => {
           <div className="container mx-auto flex items-center justify-between">
             {/* Left side content */}
             <div className="text-sm font-medium">
-              <span className="hidden sm:inline">Adventurize transforms boring ads into exciting adventures</span>
+              <span className="hidden sm:inline">Experience your favorite Brands in an all new way</span>
               <span className="sm:hidden">Adventurize your browsing</span>
             </div>
             
-            {/* Right side extension icon - mimicking Chrome extension placement */}
+            {/* Right side extension icon - with subtle enhancement */}
             <div 
-              className="flex items-center cursor-pointer transition-transform duration-300 hover:scale-102" 
+              className={cn(
+                "flex items-center cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg px-3 py-1.5",
+                isPulsing ? "soft-pulse" : ""
+              )}
               onClick={handleBannerClick}
             >
               <span className="text-sm font-medium mr-2 hidden sm:inline">
                 Try an Adventure
               </span>
               <div className="text-xs px-2 py-0.5 bg-white/20 rounded-full mr-2">
-                Click to preview
+                Click to Preview
               </div>
               <div className="relative">
                 <div className="bg-white/20 p-1.5 rounded-md transition-all duration-300">
                   <CompassIcon className="h-5 w-5" />
                 </div>
-                {/* Extension badge with "1" notification */}
+                {/* Notification badge */}
                 <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white border border-white/30">
                   1
                 </div>
