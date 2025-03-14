@@ -22,6 +22,7 @@ export default function ForBrands() {
         subheadline="Engage your audience with interactive, gamified experiences that drive brand loyalty, increase conversions, and provide valuable consumer insights."
         ctaText="Schedule a Demo"
         watchDemoText="View Case Studies"
+        userContext="brand"
       />
 
       {/* How it works section */}

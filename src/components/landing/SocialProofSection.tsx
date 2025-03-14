@@ -147,7 +147,26 @@ const SocialProofSection = ({
   };
 
   return (
-    <section className="w-full py-24 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-black relative overflow-hidden">
+    <section className="w-full py-24 pt-28 bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black relative overflow-hidden">
+      {/* Connecting element from previous section */}
+      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent dark:from-slate-900 dark:to-transparent"></div>
+      
+      {/* Wave pattern for seamless transition */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden rotate-180">
+        <svg
+          className="relative block w-full h-[30px] text-white dark:text-slate-900"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          style={{ filter: 'blur(0.5px)' }}
+        >
+          <path
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+            className="fill-current opacity-70"
+          ></path>
+        </svg>
+      </div>
+      
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden opacity-30 dark:opacity-10">
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-100 dark:bg-blue-900/30 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>

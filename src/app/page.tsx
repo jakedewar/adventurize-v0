@@ -16,7 +16,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero section with email collection */}
-      <HeroSection />
+      <HeroSection userContext="consumer" />
 
       {/* How it works section */}
       <section id="how-it-works">

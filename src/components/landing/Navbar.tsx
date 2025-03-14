@@ -31,8 +31,7 @@ const Navbar = ({ transparent = true }: NavbarProps) => {
   const navLinks = [
     { name: "Home", href: "#" },
     { name: "How It Works", href: "#how-it-works" },
-    { name: "Features", href: "#testimonials" },
-    { name: "Join Waitlist", href: "#email-signup" },
+    { name: "Features", href: "#testimonials" }
   ];
 
   return (
@@ -130,7 +129,7 @@ const Navbar = ({ transparent = true }: NavbarProps) => {
                 size="sm"
               >
                 <Download size={16} className="mr-1" />
-                Get Extension
+                Join Waitlist
               </Button>
             </div>
           </nav>
@@ -206,7 +205,7 @@ const Navbar = ({ transparent = true }: NavbarProps) => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Download size={16} className="mr-1" />
-              Get Extension
+              Join Waitlist
             </Button>
           </div>
         </div>
