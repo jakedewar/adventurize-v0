@@ -132,6 +132,40 @@ const HeroSection = ({
             </div>
           </div>
 
+          {/* Waitlist subtext */}
+          <div className="text-center mb-8 text-sm text-slate-300">
+            <p className="mb-2">
+              <span className="inline-flex items-center text-blue-300">
+                <Sparkles className="mr-1 h-3 w-3" /> Early access coming soon!
+              </span>
+            </p>
+            {userContext === 'consumer' ? (
+              <p className="flex items-center justify-center gap-2">
+                <span className="flex items-center">
+                  <MousePointer className="mr-1 h-3 w-3 text-slate-400" /> 
+                  <span>100+ adventures ready to explore</span>
+                </span>
+                <span className="text-slate-500">•</span>
+                <span className="flex items-center">
+                  <Bell className="mr-1 h-3 w-3 text-slate-400" /> 
+                  <span>Be the first to know</span>
+                </span>
+              </p>
+            ) : (
+              <p className="flex items-center justify-center gap-2">
+                <span className="flex items-center">
+                  <Sparkles className="mr-1 h-3 w-3 text-slate-400" /> 
+                  <span>3-5x higher engagement rates</span>
+                </span>
+                <span className="text-slate-500">•</span>
+                <span className="flex items-center">
+                  <Bell className="mr-1 h-3 w-3 text-slate-400" /> 
+                  <span>Limited partner spots available</span>
+                </span>
+              </p>
+            )}
+          </div>
+
           {/* CTA buttons
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
@@ -296,17 +330,6 @@ const HeroSection = ({
               )}
             </motion.div>
           </motion.div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-2 left-0 right-0 mx-auto w-max animate-pulse">
-          <a
-            href="#how-it-works"
-            className="flex flex-col items-center text-slate-400 hover:text-white transition-colors"
-          >
-            <span className="text-xs mb-1">Scroll to learn more</span>
-            <ChevronDown className="h-5 w-5" />
-          </a>
         </div>
       </div>
 
