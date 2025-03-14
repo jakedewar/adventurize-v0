@@ -45,7 +45,6 @@ const ExtensionPopup = ({
   }
 }: ExtensionPopupProps) => {
   const popupRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState<'adventure' | 'rewards'>('adventure');
   const [showConfetti, setShowConfetti] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   
@@ -208,58 +207,37 @@ const ExtensionPopup = ({
         return (
           <>
             <div className="mb-4">
-              <div className="flex items-center justify-between">
-                <h4 className="text-lg font-semibold mb-2 dark:text-white">
-                  Your Sustainability Adventure Awaits!
-                </h4>
-                <div className="flex items-center text-xs text-blue-700 dark:text-blue-300 font-medium">
-                  <span>Powered by</span>
-                  <span className="ml-1 font-bold">{sponsor.name}</span>
-                </div>
-              </div>
+              <h4 className="text-lg font-semibold mb-2 dark:text-white">
+                Your Sustainability Adventure Awaits!
+              </h4>
               <p className="text-slate-600 dark:text-slate-300 text-sm">
-                We've transformed this ad into an interactive journey to learn about sustainability and make a real impact with {sponsor.name}.
+                We've transformed this ad into an interactive journey to learn about sustainability and make a real impact.
               </p>
             </div>
 
-            {/* Adventure card */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 p-4 rounded-lg mb-4 border border-blue-100 dark:border-slate-600 hover:shadow-md transition-shadow">
+            {/* Clickable Adventure card */}
+            <button 
+              onClick={handleAcceptChallenge}
+              className="w-full text-left bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 p-4 rounded-lg mb-4 border border-blue-100 dark:border-slate-600 hover:shadow-md transition-all hover:border-blue-300 dark:hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
               <div className="flex items-start gap-3">
                 <div className="bg-blue-600 text-white p-2 rounded-md">
                   <Leaf className="h-5 w-5" />
                 </div>
                 <div>
                   <h5 className="font-medium text-blue-900 dark:text-blue-200">
-                    {sponsor.name} Sustainability Challenge
+                    Sustainability Challenge
                   </h5>
                   <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-                    Test your knowledge, learn fascinating facts, and discover how {sponsor.name} products can help you make a positive environmental impact!
+                    Test your knowledge, learn fascinating facts, and discover how to make a positive environmental impact!
                   </p>
                   <div className="mt-3 flex items-center text-xs text-blue-700 dark:text-blue-300">
-                    <span className="font-medium">{sponsor.tagline}</span>
+                    <span className="font-medium">Start your eco-friendly journey</span>
                     <ArrowRight className="h-3 w-3 ml-1" />
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="flex justify-between items-center">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={onClose}
-                className="text-slate-600 dark:text-slate-300"
-              >
-                Maybe Later
-              </Button>
-              <Button 
-                size="sm" 
-                className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:opacity-90 transition-opacity"
-                onClick={handleAcceptChallenge}
-              >
-                Start Adventure
-              </Button>
-            </div>
+            </button>
           </>
         );
         
@@ -377,12 +355,12 @@ const ExtensionPopup = ({
           <>
             <div className="mb-4">
               <div className="flex items-center justify-between">
-                <h4 className="text-lg font-semibold mb-2 dark:text-white flex items-center">
+                <h4 className="text-lg font-semibold dark:text-white flex items-center">
                   <Info className="h-5 w-5 mr-2 text-blue-500" />
                   Did You Know?
                 </h4>
-                <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">
-                  {sponsor.name}
+                <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center">
+                  From <span className="ml-1 text-blue-600 dark:text-blue-400 font-semibold">{sponsor.name}</span>
                 </div>
               </div>
             </div>
@@ -427,32 +405,53 @@ const ExtensionPopup = ({
                 Adventure Complete!
               </h4>
               <p className="text-slate-600 dark:text-slate-300 text-sm">
-                You scored {score}/3 and learned valuable sustainability facts with {sponsor.name}.
+                You scored {score}/3 and learned valuable sustainability facts.
               </p>
             </div>
 
             <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 mb-4">
               <h5 className="font-medium text-slate-900 dark:text-slate-200 mb-3 flex items-center">
                 <Leaf className="h-4 w-4 mr-2 text-blue-500" />
-                Your Impact with {sponsor.name}
+                Your Sustainability Impact
               </h5>
               <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                By completing this adventure, you've taken the first step toward a more sustainable lifestyle. Here's what you can do next with {sponsor.name}:
+                By completing this adventure, you've taken the first step toward a more sustainable lifestyle. Here's what you can do next:
               </p>
               <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
                 <li className="flex items-start">
                   <Check className="h-4 w-4 mr-2 text-blue-500 mt-0.5 flex-shrink-0" />
-                  <span>Try {sponsor.name}'s plant-based meal kit this week</span>
+                  <span>Try one plant-based meal this week</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-4 w-4 mr-2 text-blue-500 mt-0.5 flex-shrink-0" />
-                  <span>Use {sponsor.name}'s reusable water bottle for 7 days</span>
+                  <span>Use a reusable water bottle for 7 days</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-4 w-4 mr-2 text-blue-500 mt-0.5 flex-shrink-0" />
-                  <span>Share your favorite {sponsor.name} product with a friend</span>
+                  <span>Share a sustainability fact with a friend</span>
                 </li>
               </ul>
+            </div>
+
+            {/* Sponsor-specific CTA card */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4 rounded-lg mb-4 border border-blue-100 dark:border-blue-800/50">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-blue-600 text-white p-1.5 rounded-md">
+                  <ShoppingBag className="h-4 w-4" />
+                </div>
+                <h5 className="font-medium text-blue-900 dark:text-blue-200">
+                  {sponsor.name} Recommendations
+                </h5>
+              </div>
+              <p className="text-sm text-slate-700 dark:text-slate-300 mb-3">
+                Ready to make a difference? {sponsor.name} offers sustainable products to help you on your journey.
+              </p>
+              <Button 
+                size="sm" 
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:opacity-90 transition-opacity"
+              >
+                Shop {sponsor.name} Products
+              </Button>
             </div>
 
             <div className="flex justify-between items-center">
@@ -467,9 +466,9 @@ const ExtensionPopup = ({
               <Button 
                 size="sm" 
                 className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:opacity-90 transition-opacity"
-                onClick={() => setActiveTab('rewards')}
+                onClick={onClose}
               >
-                View Rewards
+                Close
               </Button>
             </div>
           </>
@@ -528,98 +527,24 @@ const ExtensionPopup = ({
           </div>
         </div>
 
-        {/* Extension tabs */}
-        <div className="flex border-b border-slate-200 dark:border-slate-700">
-          <button
-            className={cn(
-              "flex-1 py-2 text-sm font-medium transition-colors",
-              activeTab === 'adventure'
-                ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-                : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
-            )}
-            onClick={() => setActiveTab('adventure')}
-          >
-            Adventure
-          </button>
-          <button
-            className={cn(
-              "flex-1 py-2 text-sm font-medium transition-colors",
-              activeTab === 'rewards'
-                ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-                : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
-            )}
-            onClick={() => setActiveTab('rewards')}
-          >
-            Rewards
-          </button>
+        {/* Centered sponsor badge */}
+        <div className="flex justify-center border-b border-slate-200 dark:border-slate-700">
+          <div className="py-2 flex items-center">
+            <span className="text-xs text-slate-500 dark:text-slate-400">Powered by</span>
+            <span className="ml-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">{sponsor.name}</span>
+            <div className="mx-2 h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600"></div>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{sponsor.tagline}</span>
+          </div>
         </div>
 
         {/* Extension content */}
         <div className="p-5">
-          {activeTab === 'adventure' ? (
-            renderAdventureContent()
-          ) : (
-            <>
-              <div className="mb-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-lg font-semibold mb-2 dark:text-white">
-                    {sponsor.name} Rewards
-                  </h4>
-                  <div className="text-xs text-blue-700 dark:text-blue-300 font-medium">
-                    Exclusive Offers
-                  </div>
-                </div>
-                <p className="text-slate-600 dark:text-slate-300 text-sm">
-                  Complete adventures to earn these exciting rewards from {sponsor.name}.
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div className="flex items-center p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                  <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-md mr-3">
-                    <Gift className="h-5 w-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div>
-                    <h5 className="font-medium text-slate-900 dark:text-slate-200">15% Off {sponsor.name} Products</h5>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Complete 1 challenge</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-md mr-3">
-                    <Award className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <h5 className="font-medium text-slate-900 dark:text-slate-200">{sponsor.name} Sustainability Badge</h5>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Complete 3 challenges</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                  <div className="bg-purple-100 dark:bg-purple-900/30 p-2 rounded-md mr-3">
-                    <ShoppingBag className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <h5 className="font-medium text-slate-900 dark:text-slate-200">Free {sponsor.name} Starter Kit</h5>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Complete 5 challenges</p>
-                  </div>
-                </div>
-              </div>
-
-              <Button 
-                size="sm" 
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:opacity-90 transition-opacity"
-                onClick={() => setActiveTab('adventure')}
-              >
-                Back to Adventure
-              </Button>
-            </>
-          )}
+          {renderAdventureContent()}
         </div>
 
         {/* Extension footer */}
         <div className="bg-slate-50 dark:bg-slate-800 p-3 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700">
-          <p>This is a demo of how Adventurize transforms ads into interactive adventures with {sponsor.name}.</p>
+          <p>This is a demo of how Adventurize transforms ads into interactive adventures.</p>
         </div>
       </div>
     </div>
