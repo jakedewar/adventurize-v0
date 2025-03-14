@@ -1,9 +1,9 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Menu, X, LogIn } from "lucide-react";
+import { CompassIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
@@ -45,7 +45,7 @@ const Navbar = ({ transparent = true }: NavbarProps) => {
           <div className="flex items-center">
             <a href="#" className="flex items-center">
               <div className="h-8 w-8 rounded-md bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mr-2">
-                <span className="text-white font-bold text-lg">A</span>
+                <CompassIcon />
               </div>
               <span
                 className={cn(
@@ -125,7 +125,6 @@ const Navbar = ({ transparent = true }: NavbarProps) => {
           </div>
         </div>
       </div>
-
       {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white dark:bg-slate-900 shadow-lg">
