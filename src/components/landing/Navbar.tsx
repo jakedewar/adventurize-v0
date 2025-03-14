@@ -44,7 +44,7 @@ const Navbar = ({ transparent = true }: NavbarProps) => {
           {/* Logo */}
           <div className="flex items-center">
             <a href="#" className="flex items-center">
-              <div className="h-8 w-8 rounded-md bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mr-2">
+              <div className="h-8 w-8 text-white rounded-md bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mr-2">
                 <CompassIcon />
               </div>
               <span
