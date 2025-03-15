@@ -94,12 +94,23 @@ const MockBrowserSection = ({ userContext = 'consumer' }: MockBrowserSectionProp
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="w-full py-24 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-white relative overflow-hidden">
+    <section className="w-full py-24 bg-gradient-to-b from-slate-950/95 via-slate-950 to-slate-900/95 text-white relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-900 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-900 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Larger, more diffused gradient blobs */}
+        <div className="absolute -top-48 -right-48 w-[30rem] h-[30rem] bg-gradient-to-br from-blue-600/20 to-indigo-700/20 rounded-full blur-[100px] opacity-30"></div>
+        <div className="absolute -bottom-48 -left-48 w-[30rem] h-[30rem] bg-gradient-to-tr from-purple-600/20 to-blue-700/20 rounded-full blur-[100px] opacity-30"></div>
+        
+        {/* Additional smaller accent blobs */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-[60px]"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-indigo-500/10 rounded-full blur-[50px]"></div>
       </div>
+
+      {/* Subtle background texture */}
+      <div className="absolute inset-0 bg-grid-slate-800/20 bg-[size:20px_20px] opacity-10"></div>
+      
+      {/* Gradient overlay for smoother transitions */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950 opacity-40"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div 
@@ -118,192 +129,6 @@ const MockBrowserSection = ({ userContext = 'consumer' }: MockBrowserSectionProp
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             {currentContent.description}
           </p>
-        </motion.div>
-
-        {/* Mock Browser Window */}
-        <motion.div
-          className="max-w-5xl mx-auto mb-16 rounded-xl overflow-hidden shadow-2xl border border-slate-700"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Browser Chrome */}
-          <div className="bg-slate-800 p-2">
-            {/* Browser Controls - Top Bar with Window Controls and Tabs */}
-            <div className="flex items-center mb-2">
-              {/* Window Controls (macOS style) */}
-              <div className="flex space-x-1.5 mr-4 ml-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500 flex items-center justify-center">
-                  {/* Close icon */}
-                  <X className="h-2 w-2 text-red-800 opacity-0 group-hover:opacity-100" />
-                </div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500 flex items-center justify-center">
-                  {/* Minimize icon */}
-                  <span className="h-0.5 w-1.5 bg-yellow-800 opacity-0 group-hover:opacity-100"></span>
-                </div>
-                <div className="w-3 h-3 rounded-full bg-green-500 flex items-center justify-center">
-                  {/* Maximize icon */}
-                  <Plus className="h-2 w-2 text-green-800 opacity-0 group-hover:opacity-100" />
-                </div>
-              </div>
-              
-              {/* Chrome Tabs */}
-              <div className="flex flex-1 items-center">
-                {/* Active Tab */}
-                <div 
-                  className={cn(
-                    "relative px-3 py-2 rounded-t-md text-xs font-medium flex items-center gap-2 min-w-[140px] max-w-[200px]",
-                    "bg-slate-700 text-white border-t border-l border-r border-slate-600"
-                  )}
-                  onClick={() => setActiveTab(0)}
-                >
-                  {/* Favicon placeholder */}
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span className="truncate">{currentContent.tabTitle}</span>
-                  <X className="h-3.5 w-3.5 ml-auto opacity-60 hover:opacity-100" />
-                  
-                  {/* Tab bottom border that overlaps the toolbar border */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-slate-700"></div>
-                </div>
-                
-                {/* Inactive Tab */}
-                <div 
-                  className={cn(
-                    "relative px-3 py-2 rounded-t-md text-xs font-medium flex items-center gap-2 min-w-[100px] max-w-[160px]",
-                    "bg-slate-800 text-slate-400 border-t border-l border-r border-slate-700/50 hover:bg-slate-750"
-                  )}
-                  onClick={() => setActiveTab(1)}
-                >
-                  <span className="truncate">New Tab</span>
-                  <X className="h-3.5 w-3.5 ml-auto opacity-60 hover:opacity-100" />
-                </div>
-                
-                {/* New Tab Button */}
-                <div className="p-2 text-slate-400 hover:bg-slate-700/30 rounded-md">
-                  <Plus className="h-3.5 w-3.5" />
-                </div>
-              </div>
-            </div>
-            
-            {/* Browser Toolbar */}
-            <div className="flex items-center px-2 py-1 relative">
-              {/* Navigation Controls */}
-              <div className="flex space-x-1 text-slate-400 mr-2">
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <RefreshCw className="h-4 w-4" />
-                </button>
-              </div>
-              
-              {/* URL Bar */}
-              <div className="flex-1 bg-slate-700 rounded-full flex items-center px-3 py-1.5 group hover:bg-slate-600/70">
-                {/* Site security indicator */}
-                <Lock className="h-3.5 w-3.5 text-green-500 mr-2" />
-                
-                {/* URL display */}
-                <div className="flex-1 flex items-center">
-                  <span className="text-xs text-slate-400">https://</span>
-                  <span className="text-xs text-slate-300 ml-0.5">{currentContent.url}</span>
-                </div>
-                
-                {/* Search icon */}
-                <Search className="h-3.5 w-3.5 text-slate-400 opacity-0 group-hover:opacity-100" />
-              </div>
-              
-              {/* Browser Action Icons */}
-              <div className="flex ml-2 space-x-1 text-slate-400">
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <Star className="h-4 w-4" />
-                </button>
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <Menu className="h-4 w-4" />
-                </button>
-              </div>
-              
-              {/* Chrome Extension Icons Area */}
-              <div className="flex items-center ml-1 space-x-1">
-                {/* Adventurize Extension Icon */}
-                <div className="relative">
-                  <button className="p-1 rounded-full bg-blue-600 text-white hover:bg-blue-700">
-                    <CompassIcon className="h-4 w-4" />
-                  </button>
-                  {activeStep === 0 && (
-                    <div className="absolute -top-1 -right-1 h-3.5 w-3.5 bg-red-500 rounded-full flex items-center justify-center text-[8px] font-bold text-white border border-slate-800">
-                      1
-                    </div>
-                  )}
-                </div>
-                
-                {/* Other extension icons (just for visual effect) */}
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <div className="w-4 h-4 bg-slate-600 rounded-sm"></div>
-                </button>
-                <button className="p-1 rounded-full hover:bg-slate-700/50">
-                  <div className="w-4 h-4 bg-slate-600 rounded-sm"></div>
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          {/* Browser Content */}
-          <div className="bg-white dark:bg-slate-900 min-h-[400px] relative">
-            {/* Mock Content - Blurred/Dimmed */}
-            <div className="absolute inset-0 p-6 opacity-30 pointer-events-none">
-              <div className="w-full h-12 bg-slate-200 dark:bg-slate-700 rounded-md mb-4"></div>
-              <div className="flex gap-4 mb-6">
-                <div className="w-1/3 h-64 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                <div className="w-2/3 space-y-3">
-                  <div className="w-full h-8 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                  <div className="w-full h-4 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                  <div className="w-full h-4 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                  <div className="w-3/4 h-4 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                  <div className="w-full h-24 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                  <div className="w-full h-4 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                  <div className="w-5/6 h-4 bg-slate-200 dark:bg-slate-700 rounded-md"></div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Simplified Step Visualization - Single card with all steps */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-slate-800/80 backdrop-blur-sm p-6 rounded-xl border border-slate-700 max-w-md">
-                <h3 className="text-xl font-bold text-white mb-4 text-center">
-                  How Adventurize Works
-                </h3>
-                
-                {/* Steps as a simple list */}
-                <div className="space-y-4">
-                  {currentContent.steps.map((step, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex-shrink-0 flex items-center justify-center mr-4">
-                        {step.image}
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-white text-sm mb-1">{step.title}</h4>
-                        <p className="text-slate-300 text-sm">{step.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Demo Button */}
-                <div className="mt-6 text-center">
-                  <button 
-                    onClick={handleShowDemo}
-                    className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium py-2 px-4 rounded-md hover:from-blue-700 hover:to-indigo-700 transition-colors"
-                  >
-                    Try Interactive Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Try Interactive Demo Button */}

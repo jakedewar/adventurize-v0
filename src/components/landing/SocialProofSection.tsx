@@ -160,7 +160,7 @@ const SocialProofSection = ({
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-900/50 text-blue-300 text-sm font-medium">
-            MVP Features
+            What Early Users Say
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
             Adventure in Your Browser
