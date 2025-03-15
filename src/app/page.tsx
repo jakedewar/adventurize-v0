@@ -1,11 +1,11 @@
 import React from "react";
 import HeroSection from "@/components/landing/HeroSection";
-import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import SocialProofSection from "@/components/landing/SocialProofSection";
 import AnimatedBackground from "@/components/landing/AnimatedBackground";
 import EmailCollectionForm from "@/components/landing/EmailCollectionForm";
 import Navbar from "@/components/landing/Navbar";
 import ExtensionBanner from "@/components/landing/ExtensionBanner";
+import MockBrowserSection from "@/components/landing/MockBrowserSection";
 
 export default function Home() {
   return (
@@ -22,9 +22,9 @@ export default function Home() {
       {/* Hero section with email collection */}
       <HeroSection userContext="consumer" />
 
-      {/* How it works section */}
+      {/* How it works section with mock browser */}
       <section id="how-it-works">
-        <HowItWorksSection />
+        <MockBrowserSection userContext="consumer" />
       </section>
 
       {/* Social proof section */}

@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Bell, Sparkles, MousePointer, ChevronRight, Pause, Play } from "lucide-react";
+import { ArrowRight, Bell, Sparkles, MousePointer, ChevronRight, Pause, Play, CompassIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import ExtensionPopup from "./ExtensionPopup";
 
 interface HowItWorksSectionProps {
   title?: string;
@@ -40,10 +41,11 @@ const HowItWorksSection = ({
   ],
 }: HowItWorksSectionProps) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
   
   // Time in seconds for each step
   const stepDuration = 8; // 8 seconds per step
@@ -116,6 +118,14 @@ const HowItWorksSection = ({
     };
   }, [isAutoPlaying]);
 
+  const handleShowDemo = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
   // Animation variants for framer-motion
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -139,11 +149,11 @@ const HowItWorksSection = ({
   };
 
   return (
-    <section className="w-full py-24 pb-28 bg-gradient-to-b from-slate-100 via-white to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 relative overflow-hidden">
+    <section className="w-full py-24 pb-28 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-white relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden opacity-50 dark:opacity-20">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-200 dark:bg-purple-900 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 overflow-hidden opacity-20">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-900 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-900 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -154,13 +164,13 @@ const HowItWorksSection = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-sm font-medium">
+          <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-900/50 text-blue-300 text-sm font-medium">
             Chrome Extension MVP
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
             {title}
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             {description}
           </p>
         </motion.div>
@@ -175,18 +185,18 @@ const HowItWorksSection = ({
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="sticky top-24 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-slate-100 dark:border-slate-700">
+            <div className="sticky top-24 bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-slate-700">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">How It Works</h3>
+                <h3 className="text-xl font-bold text-white">How It Works</h3>
                 <button 
                   onClick={toggleAutoPlay}
-                  className={isAutoPlaying ? "p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" : "p-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white dark:hover:bg-slate-600 transition-colors"} 
+                  className={isAutoPlaying ? "p-2 rounded-full bg-slate-700 hover:bg-slate-600 transition-colors" : "p-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-colors"} 
                   aria-label={isAutoPlaying ? "Pause auto-play" : "Start auto-play"}
                 >
                   {isAutoPlaying ? (
-                    <Pause className="h-4 w-4 text-slate-700 dark:text-slate-300" />
+                    <Pause className="h-4 w-4 text-slate-300" />
                   ) : (
-                    <Play className="h-4 w-4 text-white dark:text-slate-300" />
+                    <Play className="h-4 w-4 text-white" />
                   )}
                 </button>
               </div>
@@ -199,15 +209,15 @@ const HowItWorksSection = ({
                     className={cn(
                       "w-full text-left p-4 rounded-lg transition-all duration-300 flex items-center",
                       activeStep === index 
-                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 shadow-sm" 
-                        : "hover:bg-slate-100 dark:hover:bg-slate-700/50 text-slate-700 dark:text-slate-300"
+                        ? "bg-blue-900/30 text-blue-300 shadow-sm" 
+                        : "hover:bg-slate-800/50 text-slate-300"
                     )}
                   >
                     <div className={cn(
                       "w-8 h-8 rounded-full flex items-center justify-center mr-3 transition-all",
                       activeStep === index 
                         ? "bg-blue-600 text-white" 
-                        : "bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300"
+                        : "bg-slate-700 text-slate-300"
                     )}>
                       {index + 1}
                     </div>
@@ -221,7 +231,7 @@ const HowItWorksSection = ({
               
               {/* Progress bar for auto-play */}
               {isAutoPlaying && (
-                <div className="mt-4 h-1 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div className="mt-4 h-1 bg-slate-700 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-blue-500 transition-all duration-50 ease-linear"
                     style={{ width: `${progress}%` }}
@@ -239,7 +249,7 @@ const HowItWorksSection = ({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden">
+            <div className="bg-slate-800 rounded-xl shadow-xl border border-slate-700 overflow-hidden">
               {/* Visual representation */}
               <div className="h-64 bg-gradient-to-r from-blue-500 to-indigo-600 relative overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -271,19 +281,19 @@ const HowItWorksSection = ({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="prose prose-lg dark:prose-invert max-w-none"
+                  className="prose prose-invert max-w-none"
                 >
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-white mb-4">
                     {steps[activeStep].title}
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-300">
+                  <p className="text-slate-300">
                     {steps[activeStep].description}
                   </p>
                   
                   {/* Step-specific additional content */}
                   {activeStep === 0 && (
-                    <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-100 dark:border-amber-800/30">
-                      <p className="text-amber-800 dark:text-amber-300 text-sm">
+                    <div className="mt-6 p-4 bg-amber-900/20 rounded-lg border border-amber-800/30">
+                      <p className="text-amber-300 text-sm">
                         Our notifications are designed to be non-intrusive, appearing only when relevant to your interests and browsing habits.
                       </p>
                     </div>
@@ -291,22 +301,22 @@ const HowItWorksSection = ({
                   
                   {activeStep === 1 && (
                     <div className="mt-6 grid grid-cols-3 gap-4">
-                      <div className="aspect-video bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center">
-                        <span className="text-emerald-700 dark:text-emerald-300 font-medium">Step 1</span>
+                      <div className="aspect-video bg-emerald-900/20 rounded-lg flex items-center justify-center">
+                        <span className="text-emerald-300 font-medium">Step 1</span>
                       </div>
-                      <div className="aspect-video bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center">
-                        <span className="text-emerald-700 dark:text-emerald-300 font-medium">Step 2</span>
+                      <div className="aspect-video bg-emerald-900/20 rounded-lg flex items-center justify-center">
+                        <span className="text-emerald-300 font-medium">Step 2</span>
                       </div>
-                      <div className="aspect-video bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center">
-                        <span className="text-emerald-700 dark:text-emerald-300 font-medium">Step 3</span>
+                      <div className="aspect-video bg-emerald-900/20 rounded-lg flex items-center justify-center">
+                        <span className="text-emerald-300 font-medium">Step 3</span>
                       </div>
                     </div>
                   )}
                   
                   {activeStep === 2 && (
-                    <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800/30 flex items-center">
+                    <div className="mt-6 p-4 bg-blue-900/20 rounded-lg border border-blue-800/30 flex items-center">
                       <Sparkles className="h-5 w-5 text-blue-500 mr-2" />
-                      <p className="text-blue-800 dark:text-blue-300 text-sm">
+                      <p className="text-blue-300 text-sm">
                         Our AI-powered system learns from your preferences to deliver increasingly relevant adventures over time.
                       </p>
                     </div>
@@ -321,8 +331,8 @@ const HowItWorksSection = ({
                     className={cn(
                       "px-4 py-2 rounded-lg transition-all",
                       activeStep === 0
-                        ? "opacity-50 cursor-not-allowed bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500"
-                        : "bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
+                        ? "opacity-50 cursor-not-allowed bg-slate-800 text-slate-500"
+                        : "bg-slate-800 hover:bg-slate-700 text-slate-300"
                     )}
                   >
                     Previous
@@ -334,7 +344,7 @@ const HowItWorksSection = ({
                     className={cn(
                       "px-4 py-2 rounded-lg transition-all",
                       activeStep === steps.length - 1
-                        ? "opacity-50 cursor-not-allowed bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500"
+                        ? "opacity-50 cursor-not-allowed bg-slate-800 text-slate-500"
                         : "bg-blue-600 hover:bg-blue-700 text-white"
                     )}
                   >
@@ -353,8 +363,8 @@ const HowItWorksSection = ({
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <a
-            href="#email-signup"
+          <button
+            onClick={handleShowDemo}
             className={cn(
               "inline-flex items-center justify-center px-8 py-4 rounded-full",
               "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700",
@@ -362,30 +372,21 @@ const HowItWorksSection = ({
               "transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
             )}
           >
-            Join Waitlist
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
+            Try Interactive Demo
+            <CompassIcon className="ml-2 h-5 w-5" />
+          </button>
         </motion.div>
       </div>
       
       {/* Connecting element to create seamless transition to next section */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent dark:from-slate-900 dark:to-transparent"></div>
-      
-      {/* Wave pattern for seamless transition */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg
-          className="relative block w-full h-[30px] text-white dark:text-slate-900"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          style={{ filter: 'blur(0.5px)' }}
-        >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            className="fill-current opacity-70"
-          ></path>
-        </svg>
-      </div>
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-900 to-transparent"></div>
+
+      {/* Extension Popup */}
+      {showPopup && (
+        <div className="relative z-[9999]">
+          <ExtensionPopup onClose={handleClosePopup} />
+        </div>
+      )}
     </section>
   );
 };

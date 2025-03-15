@@ -19,7 +19,7 @@ const Testimonial = ({
   rating = 5,
 }: TestimonialProps) => {
   return (
-    <Card className="h-full bg-white/10 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20 transform hover:-translate-y-2">
+    <Card className="h-full bg-slate-900/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20 transform hover:-translate-y-2">
       <CardHeader className="pb-2">
         <div className="flex items-center gap-4">
           <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-blue-500/20">
@@ -30,8 +30,8 @@ const Testimonial = ({
             />
           </div>
           <div>
-            <CardTitle className="text-lg font-medium">{author}</CardTitle>
-            <p className="text-sm text-muted-foreground">{company}</p>
+            <CardTitle className="text-lg font-medium text-white">{author}</CardTitle>
+            <p className="text-sm text-slate-400">{company}</p>
             <div className="flex mt-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
@@ -49,7 +49,7 @@ const Testimonial = ({
         </div>
       </CardHeader>
       <CardContent>
-        <p className="italic text-sm md:text-base">"{quote}"</p>
+        <p className="text-slate-300">"{quote}"</p>
       </CardContent>
     </Card>
   );
@@ -68,11 +68,11 @@ const FeatureCard = ({
 }: FeatureCardProps) => {
   return (
     <div className="flex flex-col items-center group">
-      <div className="h-24 w-full bg-white/10 backdrop-blur-sm rounded-lg p-5 flex flex-col items-center justify-center border border-slate-200/10 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:border-blue-500/20 group-hover:bg-white/20 dark:group-hover:bg-slate-800/50">
+      <div className="h-24 w-full bg-slate-800/50 backdrop-blur-sm rounded-lg p-5 flex flex-col items-center justify-center border border-slate-700/30 shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:border-blue-500/20 group-hover:bg-slate-800/80">
         <div className="mb-2">{icon}</div>
-        <h3 className="text-lg font-semibold text-slate-800 dark:text-white">{title}</h3>
+        <h3 className="text-lg font-semibold text-white">{title}</h3>
       </div>
-      <p className="mt-3 text-sm text-center text-slate-600 dark:text-slate-300">{description}</p>
+      <p className="mt-3 text-sm text-center text-slate-300">{description}</p>
     </div>
   );
 };
@@ -147,48 +147,32 @@ const SocialProofSection = ({
   };
 
   return (
-    <section className="w-full py-24 pt-28 bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-black relative overflow-hidden">
+    <section className="w-full py-24 pt-28 bg-gradient-to-b from-slate-900 via-slate-900 to-black text-white relative overflow-hidden">
       {/* Connecting element from previous section */}
-      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent dark:from-slate-900 dark:to-transparent"></div>
-      
-      {/* Wave pattern for seamless transition */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden rotate-180">
-        <svg
-          className="relative block w-full h-[30px] text-white dark:text-slate-900"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          style={{ filter: 'blur(0.5px)' }}
-        >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            className="fill-current opacity-70"
-          ></path>
-        </svg>
-      </div>
+      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-slate-900 to-transparent"></div>
       
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden opacity-30 dark:opacity-10">
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-100 dark:bg-blue-900/30 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-100 dark:bg-indigo-900/30 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-900/30 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-indigo-900/30 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-sm font-medium">
+          <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-900/50 text-blue-300 text-sm font-medium">
             MVP Features
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
             Adventure in Your Browser
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             Our Chrome Extension MVP delivers personalized micro-adventures through a simple, engaging popup UI.
           </p>
         </div>
 
         {/* Testimonials */}
         <div>
-          <h3 className="text-xl font-semibold mb-8 text-center">
+          <h3 className="text-xl font-semibold mb-8 text-center text-white">
             What Early Users Say
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -75,8 +75,8 @@ const ExtensionBanner = () => {
           <div className="container mx-auto flex items-center justify-between">
             {/* Left side content */}
             <div className="text-sm font-medium">
-              <span className="hidden sm:inline">Experience your favorite Brands in an all new way</span>
-              <span className="sm:hidden">Adventurize your browsing</span>
+              <span className="hidden sm:inline">See how Adventurize transforms ads into interactive experiences</span>
+              <span className="sm:hidden">Try Adventurize demo</span>
             </div>
             
             {/* Right side extension icon - with subtle enhancement */}
@@ -88,10 +88,10 @@ const ExtensionBanner = () => {
               onClick={handleBannerClick}
             >
               <span className="text-sm font-medium mr-2 hidden sm:inline">
-                Try an Adventure
+                Try Interactive Demo
               </span>
               <div className="text-xs px-2 py-0.5 bg-white/20 rounded-full mr-2">
-                Click to Preview
+                Click to Experience
               </div>
               <div className="relative">
                 <div className="bg-white/20 p-1.5 rounded-md transition-all duration-300">
